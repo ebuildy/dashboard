@@ -1,0 +1,1 @@
+{"took":10012,"timed_out":false,"_shards":{"total":24,"successful":24,"failed":0},"hits":{"total":668589027,"max_score":0.0,"hits":[]},"facets":{"terms":{"_type":"terms","missing":0,"total":668589027,"other":0,"terms":[{"term":"http","count":649938640},{"term":"https","count":18650387}]}}}

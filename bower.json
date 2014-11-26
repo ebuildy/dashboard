@@ -1,0 +1,17 @@
+{
+  "name": "dashboard",
+  "version": "0.0.1",
+  "dependencies": {
+    "angular": ">= 1.2.0",
+    "angular-gridster": ">= 0.10.8"
+  },
+  "ignore": [
+    "**/.*",
+    "Gruntfile.js",
+    "package.json",
+    "node_modules",
+    "components"
+  ],
+  "devDependencies": {},
+  "appPath": "app"
+}

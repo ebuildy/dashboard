@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Demo Dashboard</title>
+    <link href="/dist/styles/angular-dashboard.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body ng-app="angular-dashboard-demo">
+    <header class="navbar">
+        <div class="navbar-inner">
+            <h3>Dashboard exemple</h3>
+        </div>
+    </header>
+
+    <div dashboard-container columns="4">
+
+        <div layout="0,0,4,1">
+            <form class="form-horizontal widget" ng-submit="doSearch()">
+                <div class="row">
+                    <div class="col-sm-3">
+                        Search on a field:
+                    </div>
+                    <div class="col-sm-3">
+                        <select ng-model="search.field" class="form-control">
+                            <option value="title">Title</option>
+                            <option value="body">Body</option>
+                            <option value="uri.domain">Domain</option>
+                            <option value="uri.url">URL</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" ng-model="search.value" />
+                    </div>
+                    <div class=col-sm-2>
+                        <input type="submit" class="btn btn-success" value="Search" name="value" />
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div layout="0,1,3,3" title="Résultats" source="elasticSearchData" source-query="search" source-search="{{search}}">
+            <div ng-repeat="item in data.hits.hits" class="row">
+                {{item._source.title}}
+                <hr/>
+            </div>
+        </div>
+
+        <div layout="3,1,1,1" title="Protocol" source="elasticSearchData" source-query="term_facet" source-field="uri.protocol" source-search="{{search}}">
+            <table class="table">
+                <tr ng-repeat="item in data.facets.terms.terms">
+                    <td>{{item.term}}</td>
+                    <td>{{item.count}}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div layout="3,2,1,1" title="Top domains" source="elasticSearchData" source-query="term_facet" source-field="uri.protocol" source-search="{{search}}">
+            <table class="table">
+                <tr ng-repeat="item in data.facets.terms.terms">
+                    <td>{{item.term}}</td>
+                    <td>{{item.count}}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div layout="3,3,1,1" source="elasticSearchData" source-query="term_facet" source-field="uri.protocol" source-search="{{search}}">
+            <table class="table">
+                <tr ng-repeat="item in data.facets.terms.terms">
+                    <td>{{item.term}}</td>
+                    <td>{{item.count}}</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/dist/scripts/angular-dashboard.js"></script>
+    <script src="/scripts/app.js"></script>
+    <script src="/scripts/data.js"></script>
+</body>
+</html>
